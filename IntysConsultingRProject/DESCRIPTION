@@ -1,0 +1,20 @@
+Package: IntysConsulting
+Type: Package
+Title: Interface to subset selection problems in JAMES
+Version: 1.0.0
+Date: 2020-02-11
+Author: A.Colmant
+Maintainer: A.Colmant <alexandre.colmant@bayer.com>
+Description: This package provides R interface functions to various functions developed and shared by Intys Consultants
+Developer: Alexandre Colmant
+License: file LICENSE
+LazyLoad: yes
+LazyData: yes
+Depends:
+    rJava,
+    BCS.Base,
+    lattice,
+    BCS.CoreAlgorithms
+Suggests:
+    testthat
+RoxygenNote: 6.1.0
