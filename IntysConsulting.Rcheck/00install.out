@@ -1,0 +1,19 @@
+* installing *source* package 'IntysConsulting' ...
+** using staged installation
+** help
+No man pages found in package  'IntysConsulting' 
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+*** arch - i386
+Error: package or namespace load failed for 'IntysConsulting' in namespaceExport(ns, exports):
+ undefined exports: envUnravelledGenotypeObjectiveFunction, gapdCrossingCombinationsPopulationSizes, gapdInbreedingCoefficientMetric, gapdInbreedingCoefficientMetricBounds, gapdMinorAllelesFrequencyMetric, gapdMinorAllelesFrequencyMetricBounds, gapdObjectiveFunctions, gapdOptimisation, gapdParentsMinorAlleleFrequenciesContributions, gapdSPVCalculations, gapdSearchParametersConfiguration, gapdTraitsCorrelationsMatrix, gapdTrialsSubsetSizes, heteroticPoolsOptimisation, markersSelection, markersSelectionByChromosome, markersSelectionFull, pRepFieldConfiguration, pRepInitialDesign, pRepOptimisation, pRepOutput, phenoObsAlgorithmPerformance, phenoObsDataManagement, phenoObsOptimisation, phenoObsOutput
+Error: loading failed
+Execution halted
+*** arch - x64
+Error: package or namespace load failed for 'IntysConsulting' in namespaceExport(ns, exports):
+ undefined exports: envUnravelledGenotypeObjectiveFunction, gapdCrossingCombinationsPopulationSizes, gapdInbreedingCoefficientMetric, gapdInbreedingCoefficientMetricBounds, gapdMinorAllelesFrequencyMetric, gapdMinorAllelesFrequencyMetricBounds, gapdObjectiveFunctions, gapdOptimisation, gapdParentsMinorAlleleFrequenciesContributions, gapdSPVCalculations, gapdSearchParametersConfiguration, gapdTraitsCorrelationsMatrix, gapdTrialsSubsetSizes, heteroticPoolsOptimisation, markersSelection, markersSelectionByChromosome, markersSelectionFull, pRepFieldConfiguration, pRepInitialDesign, pRepOptimisation, pRepOutput, phenoObsAlgorithmPerformance, phenoObsDataManagement, phenoObsOptimisation, phenoObsOutput
+Error: loading failed
+Execution halted
+ERROR: loading failed for 'i386', 'x64'
+* removing 'C:/Users/Gebruiker/Documents/Intys/RStudio/IntysConsulting.Rcheck/IntysConsulting'

@@ -11,3 +11,5 @@ License: file LICENSE
 LazyLoad: yes
 LazyData: yes
 RoxygenNote: 6.1.0
+NeedsCompilation: no
+Packaged: 2020-02-11 14:02:04 UTC; Gebruiker
