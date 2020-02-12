@@ -1,0 +1,19 @@
+* using log directory 'C:/Users/Gebruiker/Documents/Intys/RStudio/IntysConsultingRProject/IntysConsulting.Rcheck'
+* using R version 3.6.2 (2019-12-12)
+* using platform: x86_64-w64-mingw32 (64-bit)
+* using session charset: ISO8859-1
+* checking for file 'IntysConsulting/DESCRIPTION' ... OK
+* checking extension type ... Package
+* this is package 'IntysConsulting' version '1.0.1'
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking whether package 'IntysConsulting' can be installed ... ERROR
+Installation failed.
+See 'C:/Users/Gebruiker/Documents/Intys/RStudio/IntysConsultingRProject/IntysConsulting.Rcheck/00install.out' for details.
+* DONE
+Status: 1 ERROR

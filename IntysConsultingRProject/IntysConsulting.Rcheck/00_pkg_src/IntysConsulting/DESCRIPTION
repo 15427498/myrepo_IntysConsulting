@@ -1,8 +1,8 @@
 Package: IntysConsulting
 Type: Package
 Title: Interface to manage the R-related projects at Intys consulting
-Version: 1.0.0
-Date: 2020-02-11
+Version: 1.0.1
+Date: 2020-02-12
 Author: A.Colmant
 Maintainer: A.Colmant <alexandre.colmant@bayer.com>
 Description: This package provides R interface functions to various functions developed and shared by Intys Consultants
@@ -10,4 +10,6 @@ Developer: Alexandre Colmant
 License: file LICENSE
 LazyLoad: yes
 LazyData: yes
-RoxygenNote: 6.1.0
+RoxygenNote: 1.0.0
+NeedsCompilation: no
+Packaged: 2020-02-12 11:44:09 UTC; Gebruiker

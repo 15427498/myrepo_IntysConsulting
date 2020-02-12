@@ -1,0 +1,25 @@
+* installing *source* package 'IntysConsulting' ...
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+No man pages found in package  'IntysConsulting' 
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+*** arch - i386
+Error: package or namespace load failed for 'IntysConsulting':
+ .onLoad failed in loadNamespace() for 'IntysConsulting', details:
+  call: loadNamespace(name)
+  error: there is no package called 'rJava'
+Error: loading failed
+Execution halted
+*** arch - x64
+Error: package or namespace load failed for 'IntysConsulting':
+ .onLoad failed in loadNamespace() for 'IntysConsulting', details:
+  call: loadNamespace(name)
+  error: there is no package called 'rJava'
+Error: loading failed
+Execution halted
+ERROR: loading failed for 'i386', 'x64'
+* removing 'C:/Users/Gebruiker/Documents/Intys/RStudio/IntysConsultingRProject/IntysConsulting.Rcheck/IntysConsulting'
