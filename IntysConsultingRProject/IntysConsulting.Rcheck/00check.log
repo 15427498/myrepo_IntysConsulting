@@ -2,6 +2,7 @@
 * using R version 3.6.2 (2019-12-12)
 * using platform: x86_64-w64-mingw32 (64-bit)
 * using session charset: ISO8859-1
+* using options '--no-manual --as-cran'
 * checking for file 'IntysConsulting/DESCRIPTION' ... OK
 * checking extension type ... Package
 * this is package 'IntysConsulting' version '1.0.1'
@@ -12,6 +13,7 @@
 * checking for executable files ... OK
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
+* checking serialization versions ... OK
 * checking whether package 'IntysConsulting' can be installed ... ERROR
 Installation failed.
 See 'C:/Users/Gebruiker/Documents/Intys/RStudio/IntysConsultingRProject/IntysConsulting.Rcheck/00install.out' for details.

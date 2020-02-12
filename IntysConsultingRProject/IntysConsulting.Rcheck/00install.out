@@ -10,15 +10,19 @@ No man pages found in package  'IntysConsulting'
 *** arch - i386
 Error: package or namespace load failed for 'IntysConsulting':
  .onLoad failed in loadNamespace() for 'IntysConsulting', details:
-  call: loadNamespace(name)
-  error: there is no package called 'rJava'
+  call: NULL
+  error: .onLoad failed in loadNamespace() for 'rJava', details:
+  call: fun(libname, pkgname)
+  error: JAVA_HOME cannot be determined from the Registry
 Error: loading failed
 Execution halted
 *** arch - x64
 Error: package or namespace load failed for 'IntysConsulting':
  .onLoad failed in loadNamespace() for 'IntysConsulting', details:
-  call: loadNamespace(name)
-  error: there is no package called 'rJava'
+  call: NULL
+  error: .onLoad failed in loadNamespace() for 'rJava', details:
+  call: fun(libname, pkgname)
+  error: JAVA_HOME cannot be determined from the Registry
 Error: loading failed
 Execution halted
 ERROR: loading failed for 'i386', 'x64'
