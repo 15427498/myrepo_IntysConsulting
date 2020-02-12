@@ -4,4 +4,4 @@ Error in texi2dvi(file = file, pdf = TRUE, clean = clean, quiet = quiet,  :
 Error in texi2dvi(file = file, pdf = TRUE, clean = clean, quiet = quiet,  : 
   pdflatex is not available
 Error in running tools::texi2pdf()
-You may want to clean up by 'rm -Rf C:/Users/GEBRUI~1/AppData/Local/Temp/RtmpK635VM/Rd2pdf4d747c177a42'
+You may want to clean up by 'rm -Rf C:/Users/GEBRUI~1/AppData/Local/Temp/Rtmpaodogw/Rd2pdf14a054a533f2'

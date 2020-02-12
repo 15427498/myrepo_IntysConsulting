@@ -12,5 +12,5 @@ LazyLoad: yes
 LazyData: yes
 RoxygenNote: 6.1.0
 NeedsCompilation: no
-Packaged: 2020-02-12 08:12:12 UTC; Gebruiker
-Built: R 3.6.2; ; 2020-02-12 08:12:16 UTC; windows
+Packaged: 2020-02-12 10:12:27 UTC; Gebruiker
+Built: R 3.6.2; ; 2020-02-12 10:12:34 UTC; windows
