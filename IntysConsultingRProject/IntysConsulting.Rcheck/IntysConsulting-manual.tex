@@ -1,0 +1,494 @@
+\nonstopmode{}
+\documentclass[a4paper]{book}
+\usepackage[times,inconsolata,hyper]{Rd}
+\usepackage{makeidx}
+\usepackage[utf8,latin1]{inputenc}
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package `IntysConsulting'}}
+\par\bigskip{\large \today}
+\end{center}
+\begin{description}
+\raggedright{}
+\item[Type]\AsIs{Package}
+\item[Title]\AsIs{Interface to manage the R-related projects at Intys consulting}
+\item[Version]\AsIs{1.0.1}
+\item[Date]\AsIs{2020-02-12}
+\item[Author]\AsIs{A.Colmant}
+\item[Maintainer]\AsIs{A.Colmant }\email{alexandre.colmant@bayer.com}\AsIs{}
+\item[Description]\AsIs{This package provides R interface functions to various functions developed and shared by Intys Consultants}
+\item[Developer]\AsIs{A.Colmant}
+\item[License]\AsIs{file LICENSE}
+\item[LazyLoad]\AsIs{yes}
+\item[LazyData]\AsIs{yes}
+\item[RoxygenNote]\AsIs{7.0.2}
+\item[NeedsCompilation]\AsIs{no}
+\end{description}
+\Rdcontents{\R{} topics documented:}
+\inputencoding{utf8}
+\HeaderA{phenoObsAlgorithmPerformance}{Algorithm performances analysis of pheno OBS.}{phenoObsAlgorithmPerformance}
+%
+\begin{Description}\relax
+Run an analysis to investigate the parameter tuning sensitivity and convergence properties of the studied algorithms.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+phenoObsAlgorithmPerformance(
+  parentsPhenotypeDataFrame,
+  offspringPhenotype,
+  parentsGeneticSimilarityArray,
+  geneticSimilarityWeight,
+  penaltyReplicatedIndividuals,
+  inclusionSet = NULL,
+  solutionSize,
+  maximumSearchTime = 60000,
+  timeWithoutImprovement = 10000,
+  maximumNumberMoves = 9e+07,
+  numberSearches,
+  numberRuns,
+  searchIds = as.character(c(1:numberSearches)),
+  searchMethod,
+  analysisParametersMS = rep(NA, numberSearches),
+  analysisParametersPT = matrix(NA, nrow = numberSearches, ncol = 3)
+)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{parentsPhenotypeDataFrame}] (required) A data frame containing the parentNames in the first column, the trait names as headings in the remianing columns, and the parent phenotype information in the remaining matrix entries.
+See example below for more clarity.
+This data frame may also be obtained from the phenoOBSDataManagement output.
+
+\item[\code{offspringPhenotype}] (required) A matrix containing:
+* The feasible offspring Ids in the first column,
+* The corresponding offspring parents in the second and third columns, and
+* The weighted, normalised trait objective evaluation of the offspring.
+This Matrix is obtained from the phenoOBSDataManagement output.
+
+\item[\code{parentsGeneticSimilarityArray}] (required) An array containing the normalised upper triangular entries of the parents genetic similarity matrix.
+This Matrix is obtained from the phenoOBSDataManagement output.
+
+\item[\code{geneticSimilarityWeight}] (required) A value in the range [0,1] for the importance of solution similarity relative to the traits.
+For example, if specified to be 0.3, then the algorithm will automatically allocate 0.7 toward finding solutions that are strong across the entirety of the traits sub-objective.
+Note, however, that the individual trait importances are in phenoOBSDataManagement.
+
+\item[\code{penaltyReplicatedIndividuals}] (default, double) A soft-constraint value penalising the presence of replicated individuals in a solution.
+Note that this value is not normalised alongside the set of upper triangular matrix entries, and so it must have at least a value of one.
+
+\item[\code{inclusionSet}] (default) An array containing the integer ids of offsping crosses that the user desires to observe in the returned solution.
+The default value is a null vector, so that no id inclusion constraint is imposed on the selection of crosses.
+
+\item[\code{solutionSize}] (required, integer) The number of crosses to be extracted.
+
+\item[\code{maximumSearchTime}] (required, integer) The total duration of each search run.
+This parameter is configured in milliseconds.
+
+\item[\code{timeWithoutImprovement}] (default, integer) An upper bound on the total duration of the optimisation process.
+This parameter is configured in milliseconds.
+
+\item[\code{maximumNumberMoves}] (default, integer) An upper bound on the total number of search space solutions visited and assessed during the course of the optimisation process.
+This parameter is configured in milliseconds.
+
+\item[\code{numberSearches}] (required, integer) The total number of search method configurations probed in the analysis.
+
+\item[\code{numberRuns}] (required, integer) The total number of algorithm runs performed for each search.
+
+\item[\code{searchIds}] (default, String array) A [1*S] vector of strings used as identifyers for the various search method configurations.
+The default argument consists of the string array ("1", "2", ... , "S").
+
+\item[\code{searchMethod}] (required, string) Summon either one of these three proposed algorithms to analyse: 
+1. Random descent (enter "RD"); 
+2. Metropolis search (enter "MS") or 
+3. Parallel  tempering (enter "PT").
+
+\item[\code{analysisParametersMS}] (default, N.A.) A [1*S] vector specifying the initial temperatures of the Metropolis search algorithm.
+
+\item[\code{analysisParametersPT}] (default, N.A.) A [S*3] data vector specifying the search parameters of the parallel tempering search algorithm.
+In the first, second and third columns (respectively):
+1. processors (integer) : The number of processors running in parallel.
+2. minTemp (double) : Minimum (i.e. final) temperature.
+3. maxTemp (double) : Maximum (i.e. initial) temperature.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+Symbols notation:
+* S : The total number of searches in the analysed scenario.
+* R : The total number of runs in each search.
+* n : The size of the solution.
+Assumptions: (any of these may be altered at a later stage if necessary, as per user request) 
+1. This function operates for one problem at a time .
+2. The number of runs is the same across all searches (this may be altered at a later stage, as per user request).
+3. Each run is assigned the same termination criteria.
+\end{Details}
+%
+\begin{Value}
+A list containing the following four objects (respectively): 
+1. A 2D array containing the best found objective values for each run (columns dimension) and for each search (rows dimension),
+2. A 3D array containing the best found solution ids (depth dimension) for each run (columns dimension) and for each search (rows dimension),
+3. A 3D array containing the updated new best found solution objective values throughout the algorithm (depth dimension) for each run (columns dimension) and for each search (rows dimension), and
+4. A 3D array containing the updated new best found solution objective times throughout the algorithm (depth dimension) for each run (columns dimension) and for each search (rows dimension).
+Note: the last value across the depth dimension of this array in any given search and run therefore corresponds to the convergence time.
+\end{Value}
+%
+\begin{Author}\relax
+A.Colmant and G.De Meyer
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+parentsPhenotypeDataFrame <- data.frame(
+parentNames = c("A","B","C","D"),
+Yield = c(1200,1300,1250,1150),
+Lint = c(50,40,45,55),
+BollType = c(4.5,4,3,4.5))
+offspringPhenotype <- matrix(nrow = 5, ncol = 4)
+offspringPhenotype[1,] <- c(1,1,2,0.6)
+offspringPhenotype[2,] <- c(2,1,3,0.5)
+offspringPhenotype[3,] <- c(4,2,3,0.7)
+offspringPhenotype[4,] <- c(5,2,4,0.5)
+offspringPhenotype[5,] <- c(6,3,4,0.4)
+parentsGeneticSimilarityArray <- c(1,0.33333333,0,0.66666667,0.166666667,0.8333333333)
+geneticSimilarityWeight <- 0.4
+penaltyReplicatedIndividuals <- 1.08
+inclusionSet <- c(4)
+solutionSize <- 2
+maximumSearchTime <- 500
+timeWithoutImprovement <- 200
+maximumNumberMoves <- 400
+numberSearches <- 2
+numberRuns <- 2
+searchIds <- c("Search 1","Search 2")
+searchMethod <- "MS"
+analysisParametersMS <- c(8,0.5) 
+analysisParametersPT <- matrix(nrow=numberSearches, ncol=3)
+analysisParametersPT[1,] <- c(5,0.1,6)
+analysisParametersPT[2,] <- c(5,0.001,2)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{phenoObsDataManagement}{Data management of pheno OBS.}{phenoObsDataManagement}
+%
+\begin{Description}\relax
+Manage, convert and simplify the pheno OBS user input data to be presented as Java input.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+phenoObsDataManagement(
+  parentsPhenotypeDataFrame,
+  parentsGeneticSimilarityMatrix,
+  constraintParameters = NULL,
+  traitObjectiveWeights
+)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{parentsPhenotypeDataFrame}] (required) A data frame containing the parentNames in the first column, the trait names as headings in the remaining columns, and the parent phenotype information in the remaining matrix entries.
+See example below for more clarity.
+
+\item[\code{parentsGeneticSimilarityMatrix}] (required, double) An [N*N] data frame, also known as relationship (triangular) matrix, containing the degree of genetic similarity accross all pairs of parents (i.e. accross all potential crosses).
+The entries ought to be mapped on the range [0,1].
+
+\item[\code{constraintParameters}] (required, double matrix) A [T*2] data frame delimiting the feasible domain space with 
+the use of threshold operational constraints. In the first and second column (respectively):
+* lbvalue : Lower numerical threshold.
+* ubvalue : Upper numerical threshold.
+These numerical thresholds impose tolerance bounds on the expected trait values that the resulting offspring corsses are allowed to undertake.
+Leave blank fields for unconstrained traits.
+Imposing both upper and lower thresholds on a specific trait is permitted.
+Check the constriction level of your resulting search space with the complementary function "phenoOBSCheckSearchSpace".
+The default setting is NULL.
+
+\item[\code{traitObjectiveWeights}] (required, double matrix) A [T*2] data frame containing the trait sub-objective weights.
+In the first and second column (respectively):
+* weight (double) : Sub-objective weight of the criterion.
+* is.maximisation? (boolean) : Enter 1 if the sub-objective is to be maximised, and 0 otherwise.
+Leave blank fields (or zeros) for traits not considered in the configuration of the objective space.
+Although the weights need not necessarily add up to one, they need to be proportional to one another as a direct reflection of their relative importance.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+Symbols notation:
+* T : The total number of input traits,
+* N : The total number of parents,
+* n : The size of the solution.
+\end{Details}
+%
+\begin{Value}
+A list containing the following five objects (respectively): 
+1. A matrix containing:
+* The feasible offspring Ids in the first column,
+* The corresponding offspring parent ids in the second and third columns, and
+* The weighted, normalised trait objective evaluation of the offspring.
+2. An array containing the normalised upper triangular entries of the parents genetic similarity matrix.
+3. The parents phenotype input data frame (same as described earlier) for use in the other pheno OBS functions. 
+4. A matrix containing the overall offspring information (for use in the output function).
+5. The parents genetic similarity matrix described above (for use in the output function).
+\end{Value}
+%
+\begin{Author}\relax
+A.Colmant, K.Baert and G.De Meyer
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+parentsPhenotypeDataFrame <- data.frame(
+parentNames = c("A","B","C","D"),
+Yield = c(1200,1300,1250,1150),
+Lint = c(50,40,45,55),
+BollType = c(4.5,4,3,4.5))
+parentsGeneticSimilarityMatrix <- matrix(nrow = 4, ncol = 4)
+parentsGeneticSimilarityMatrix[1,] = c(1,0.60,0.40,0.30)
+parentsGeneticSimilarityMatrix[2,] = c(0.60,1,0.50,0.35)
+parentsGeneticSimilarityMatrix[3,] = c(0.40,0.50,1,0.55)
+parentsGeneticSimilarityMatrix[4,] = c(0.30,0.35,0.55,1)
+constraintParameters <- matrix(nrow = 3, ncol = 2)
+constraintParameters[1,1] <- 1190
+traitObjectiveWeights <- matrix(nrow = 3, ncol = 2)
+traitObjectiveWeights[1,] = c(0.7,1)
+traitObjectiveWeights[2,] = c(0.3,1)
+traitObjectiveWeights[3,] = c(0,1)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{phenoObsOptimisation}{Optimisation of pheno OBS.}{phenoObsOptimisation}
+%
+\begin{Description}\relax
+Run a JAMES subset selection algorithm to attemptively find an optimal solution to a pheno OBS problem.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+phenoObsOptimisation(
+  parentsPhenotypeDataFrame,
+  offspringPhenotype,
+  parentsGeneticSimilarityArray,
+  geneticSimilarityWeight,
+  penaltyReplicatedIndividuals,
+  inbreedingCoefficientMetric = TRUE,
+  Gmatrix = matrix(nrow = 1, ncol = 1),
+  inbreedingCoefficientBoundsEstimatorSampleSize = 10000,
+  inclusionSet = NULL,
+  exclusionSet = NULL,
+  solutionSize,
+  maximumSearchTime,
+  timeWithoutImprovement = 10000,
+  maximumNumberMoves = 9e+07,
+  searchMethod = "MS",
+  searchParametersMS = c(5e-05),
+  searchParametersPT = c(6, 1e-07, 0.001)
+)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{parentsPhenotypeDataFrame}] (required) A data frame containing the parentNames in the first column, the trait names as headings in the remianing columns, and the parent phenotype information in the remaining matrix entries.
+See example below for more clarity.
+This data frame may also be obtained from the phenoOBSDataManagement output.
+
+\item[\code{offspringPhenotype}] (required) A matrix containing:
+* The feasible offspring Ids in the first column,
+* The corresponding offspring parents in the second and third columns, and
+* The weighted, normalised trait objective evaluation of the offspring.
+This Matrix is obtained from the phenoOBSDataManagement output.
+
+\item[\code{parentsGeneticSimilarityArray}] (required) An array containing the normalised upper triangular entries of the parents genetic similarity matrix.
+This Matrix is obtained from the phenoOBSDataManagement output.
+
+\item[\code{geneticSimilarityWeight}] (required) A value in the range [0,1] for the importance of solution similarity relative to the traits.
+For example, if specified to be 0.3, then the algorithm will automatically allocate 0.7 toward finding solutions that are strong across the entirety of the traits sub-objective.
+Note, however, that the individual trait importances are in phenoOBSDataManagement.
+
+\item[\code{penaltyReplicatedIndividuals}] (default, double) A soft-constraint value penalising the presence of replicated individuals in a solution.
+Note that this value is not normalised alongside the set of upper triangular matrix entries, and so it must have at least a value of one.
+
+\item[\code{inbreedingCoefficientMetric}] (default, boolean) Set to TRUE if the inbreeding coefficient ought to be used to measure the diversity in the population, and FALSE if the more basic genetic similarity metric ought to be used.
+The default value is TRUE.
+
+\item[\code{Gmatrix}] (default) A symmetrical matrix containing values on the range [0,2] depicting the relationship between the parents.
+This matrix is for use only in the inbreeding coefficient metric and thus only needs to be provided if the argument inbreedingCoefficientMetric is TRUE.
+
+\item[\code{inbreedingCoefficientBoundsEstimatorSampleSize}] (default, integer) A value specifying the number of samples employed in estimating the lower and upper bound values of the inbreeding coefficient metric.
+Thse bounds are used toward the normalisation process of the diversity sub-objective function.
+The higher the complexity of the problem, the higher this value ought to be.
+The default value is set to a conservative 10000.
+
+\item[\code{inclusionSet}] (default, integer array) A vector containing the integer ids of offsping crosses that the user desires to include a priori in the returned solution.
+The default value is a null vector, so that no id inclusion constraint is imposed on the selection of crosses.
+
+\item[\code{exclusionSet}] (default, integer array) A vector containing the integer ids of offsping crosses that the user desires to exclude a priori from the returned solution.
+The default value is a null vector, so that no id exclusion constraint is imposed on the selection of crosses.
+
+\item[\code{solutionSize}] (required, integer) The number of crosses to be extracted.
+
+\item[\code{maximumSearchTime}] (required, integer) An upper bound on the total duration of the optimisation process.
+This parameter is configured in milliseconds.
+
+\item[\code{timeWithoutImprovement}] (default, integer) An upper bound on the total duration of the optimisation process.
+This parameter is configured in milliseconds.
+
+\item[\code{maximumNumberMoves}] (default, integer) An upper bound on the total number of search space solutions visited and assessed during the course of the optimisation process.
+
+\item[\code{searchMethod}] (default) Summon either one of these three proposed algorithms to run: 
+1. Random descent (enter "RD"); 
+2. Metropolis search (enter "MS") or 
+3. Parallel  tempering (enter "PT").
+
+\item[\code{searchParametersMS}] (default, double) A [1*1] data vector specifying the initial temperature of the Metropolis search algorithm.
+
+\item[\code{searchParametersPT}] (default) A [1*3] data vector specifying the search parameters of the parallel tempering search algorithm.
+In the first, second and third slot (respectively):
+1. processors (integer) : The number of processors running in parallel.
+2. minTemp (double) : Minimum (i.e. final) temperature.
+3. maxTemp (double) : Maximum (i.e. initial) temperature.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+A list containing the following five objects (respectively): 
+1. The best found ids in R format,
+2. The genetic diversity score of the best found solution,
+3. The size of the extracted solution (for use in the phenoOBSOutput function),
+4. The objective function value of the best found solution, and 
+5. The convergence time (in milliseconds) of the algorithm (i.e. how long it took to reach the vicinity of the best found solution).
+\end{Value}
+%
+\begin{Author}\relax
+A.Colmant, K.Baert and G.De Meyer
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+parentsPhenotypeDataFrame <- data.frame(
+parentNames = c("A","B","C","D"),
+Yield = c(1200,1300,1250,1150),
+Lint = c(50,40,45,55),
+BollType = c(4.5,4,3,4.5))
+offspringPhenotype <- matrix(nrow = 5, ncol = 4)
+offspringPhenotype[1,] <- c(1,1,2,0.6)
+offspringPhenotype[2,] <- c(2,1,3,0.5)
+offspringPhenotype[3,] <- c(4,2,3,0.7)
+offspringPhenotype[4,] <- c(5,2,4,0.5)
+offspringPhenotype[5,] <- c(6,3,4,0.4)
+parentsGeneticSimilarityArray <- c(1,0.33333333,0,0.66666667,0.166666667,0.8333333333)
+geneticSimilarityWeight <- 0.4
+penaltyReplicatedIndividuals <- 1.08
+inbreedingCoefficientMetric <- TRUE
+Gmatrix <- matrix(nrow = 4, ncol = 4)
+Gmatrix[1,] = c(1,0.60,1.40,0.30)
+Gmatrix[2,] = c(0.60,1,0.50,0.35)
+Gmatrix[3,] = c(1.40,0.50,1,1.55)
+Gmatrix[4,] = c(0.30,0.35,1.55,1)
+inbreedingCoefficientBoundsEstimatorSampleSize <- 300
+inclusionSet <- c(4)
+exclusionSet <- c(6)
+solutionSize <- 2
+maximumSearchTime <- 500
+timeWithoutImprovement <- 200
+maximumNumberMoves <- 400
+searchMethod <- c("MS")
+searchParametersMS <- c(5)
+searchParametersPT <- c(6,0.001,9)
+
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{phenoObsOutput}{Output information of pheno OBS.}{phenoObsOutput}
+%
+\begin{Description}\relax
+Present the output results obtained from a pheno OBS search.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+phenoObsOutput(
+  parentsPhenotypeDataFrame,
+  optimalSolutionIdsR,
+  bestFoundSolutionGeneticDiversity,
+  overallOffspringInformation,
+  solutionSize,
+  parentsGeneticSimilarityMatrix
+)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{parentsPhenotypeDataFrame}] (required) A data frame containing the parentNames in the first column, the trait names as headings in the remianing columns, and the parent phenotype information in the remaining matrix entries.
+See example below for more clarity.
+This data frame may also be obtained from the phenoOBSDataManagement output.
+
+\item[\code{optimalSolutionIdsR}] (required, integer) A [1*n] vector containing the best found Ids, expressed in R format,
+
+\item[\code{bestFoundSolutionGeneticDiversity}] (required, double) The genetic diversity of the best found solution.
+
+\item[\code{overallOffspringInformation}] (required) A matrix containing information on all offspring combinations.
+
+\item[\code{solutionSize}] (required, integer) The number of crosses to be extracted.
+
+\item[\code{parentsGeneticSimilarityMatrix}] (required, double) An [N*N] data frame, also known as relationship (triangular) matrix, containing the degree of genetic similarity accross all pairs of parents (i.e. accross all potential crosses).
+The entries ought to be mapped on the range [0,1].
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Details}\relax
+symbols notation:
+* n : The size of the solution
+\end{Details}
+%
+\begin{Value}
+A list containing the following two objects (respectively): 
+1. A [1*(T+1)] doubles vector containing the solution sub-objective scores (respectively): 
+* Trait scores, in the same order as the parentPhenotype data in vector entries 1 to T, and
+* Solution genetic similarity score in vector entry T+1.
+2. A [n*(5+T+1)] string matrix containing:
+* Best found offspring IDs in the first column,
+* Corresponding parent IDs in the second and third columns,
+* Corresponding parent IDs in the fourth and fifth columns,
+* Corresponding trait scores in the next T columns, and
+* Corresponding relationship matrix entry in the last column.
+\end{Value}
+%
+\begin{Author}\relax
+A.Colmant, K.Baert and G.De Meyer
+\end{Author}
+%
+\begin{Examples}
+\begin{ExampleCode}
+parentsPhenotypeDataFrame <- data.frame(
+parentNames = c("A","B","C","D"),
+Yield = c(1200,1300,1250,1150),
+Lint = c(50,40,45,55),
+BollType = c(4.5,4,3,4.5))
+optimalSolutionIdsR <- c(1,4)
+bestFoundSolutionGeneticDiversity <- 0.80167
+overallOffspringInformation <- matrix(nrow = 6, ncol = 6)
+overallOffspringInformation [1,] <- c(1,1,2,1250,45,4.25)
+overallOffspringInformation [2,] <- c(2,1,3,1225,47.5,3.75)
+overallOffspringInformation [3,] <- c(3,1,4,1175,52.5,4.5)
+overallOffspringInformation [3,] <- c(4,2,3,1275,42.5,3.5)
+overallOffspringInformation [4,] <- c(5,2,4,1225,47.5,4.25)
+overallOffspringInformation [5,] <- c(6,3,4,1200,50,3.75)
+solutionSize <- 2
+parentsGeneticSimilarityMatrix <- matrix(nrow = length(parentsPhenotypeDataFrame$parentNames), ncol = length(parentsPhenotypeDataFrame$parentNames))
+parentsGeneticSimilarityMatrix[1,] = c(1,0.60,0.40,0.30)
+parentsGeneticSimilarityMatrix[2,] = c(0.60,1,0.50,0.35)
+parentsGeneticSimilarityMatrix[3,] = c(0.40,0.50,1,0.55)
+parentsGeneticSimilarityMatrix[4,] = c(0.30,0.35,0.55,1)
+
+\end{ExampleCode}
+\end{Examples}
+\printindex{}
+\end{document}

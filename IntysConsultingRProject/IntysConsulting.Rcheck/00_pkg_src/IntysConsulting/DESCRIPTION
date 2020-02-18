@@ -6,10 +6,10 @@ Date: 2020-02-12
 Author: A.Colmant
 Maintainer: A.Colmant <alexandre.colmant@bayer.com>
 Description: This package provides R interface functions to various functions developed and shared by Intys Consultants
-Developer: Alexandre Colmant
+Developer: A.Colmant
 License: file LICENSE
 LazyLoad: yes
 LazyData: yes
-RoxygenNote: 1.0.0
+RoxygenNote: 7.0.2
 NeedsCompilation: no
-Packaged: 2020-02-12 13:45:19 UTC; Gebruiker
+Packaged: 2020-02-13 09:55:06 UTC; Gebruiker

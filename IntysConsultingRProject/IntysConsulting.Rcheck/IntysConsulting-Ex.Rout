@@ -1,0 +1,199 @@
+
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "IntysConsulting"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> options(pager = "console")
+> library('IntysConsulting')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("phenoObsAlgorithmPerformance")
+> ### * phenoObsAlgorithmPerformance
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: phenoObsAlgorithmPerformance
+> ### Title: Algorithm performances analysis of pheno OBS.
+> ### Aliases: phenoObsAlgorithmPerformance
+> 
+> ### ** Examples
+> 
+> parentsPhenotypeDataFrame <- data.frame(
++ parentNames = c("A","B","C","D"),
++ Yield = c(1200,1300,1250,1150),
++ Lint = c(50,40,45,55),
++ BollType = c(4.5,4,3,4.5))
+> offspringPhenotype <- matrix(nrow = 5, ncol = 4)
+> offspringPhenotype[1,] <- c(1,1,2,0.6)
+> offspringPhenotype[2,] <- c(2,1,3,0.5)
+> offspringPhenotype[3,] <- c(4,2,3,0.7)
+> offspringPhenotype[4,] <- c(5,2,4,0.5)
+> offspringPhenotype[5,] <- c(6,3,4,0.4)
+> parentsGeneticSimilarityArray <- c(1,0.33333333,0,0.66666667,0.166666667,0.8333333333)
+> geneticSimilarityWeight <- 0.4
+> penaltyReplicatedIndividuals <- 1.08
+> inclusionSet <- c(4)
+> solutionSize <- 2
+> maximumSearchTime <- 500
+> timeWithoutImprovement <- 200
+> maximumNumberMoves <- 400
+> numberSearches <- 2
+> numberRuns <- 2
+> searchIds <- c("Search 1","Search 2")
+> searchMethod <- "MS"
+> analysisParametersMS <- c(8,0.5) 
+> analysisParametersPT <- matrix(nrow=numberSearches, ncol=3)
+> analysisParametersPT[1,] <- c(5,0.1,6)
+> analysisParametersPT[2,] <- c(5,0.001,2)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("phenoObsDataManagement")
+> ### * phenoObsDataManagement
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: phenoObsDataManagement
+> ### Title: Data management of pheno OBS.
+> ### Aliases: phenoObsDataManagement
+> 
+> ### ** Examples
+> 
+> parentsPhenotypeDataFrame <- data.frame(
++ parentNames = c("A","B","C","D"),
++ Yield = c(1200,1300,1250,1150),
++ Lint = c(50,40,45,55),
++ BollType = c(4.5,4,3,4.5))
+> parentsGeneticSimilarityMatrix <- matrix(nrow = 4, ncol = 4)
+> parentsGeneticSimilarityMatrix[1,] = c(1,0.60,0.40,0.30)
+> parentsGeneticSimilarityMatrix[2,] = c(0.60,1,0.50,0.35)
+> parentsGeneticSimilarityMatrix[3,] = c(0.40,0.50,1,0.55)
+> parentsGeneticSimilarityMatrix[4,] = c(0.30,0.35,0.55,1)
+> constraintParameters <- matrix(nrow = 3, ncol = 2)
+> constraintParameters[1,1] <- 1190
+> traitObjectiveWeights <- matrix(nrow = 3, ncol = 2)
+> traitObjectiveWeights[1,] = c(0.7,1)
+> traitObjectiveWeights[2,] = c(0.3,1)
+> traitObjectiveWeights[3,] = c(0,1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("phenoObsOptimisation")
+> ### * phenoObsOptimisation
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: phenoObsOptimisation
+> ### Title: Optimisation of pheno OBS.
+> ### Aliases: phenoObsOptimisation
+> 
+> ### ** Examples
+> 
+> parentsPhenotypeDataFrame <- data.frame(
++ parentNames = c("A","B","C","D"),
++ Yield = c(1200,1300,1250,1150),
++ Lint = c(50,40,45,55),
++ BollType = c(4.5,4,3,4.5))
+> offspringPhenotype <- matrix(nrow = 5, ncol = 4)
+> offspringPhenotype[1,] <- c(1,1,2,0.6)
+> offspringPhenotype[2,] <- c(2,1,3,0.5)
+> offspringPhenotype[3,] <- c(4,2,3,0.7)
+> offspringPhenotype[4,] <- c(5,2,4,0.5)
+> offspringPhenotype[5,] <- c(6,3,4,0.4)
+> parentsGeneticSimilarityArray <- c(1,0.33333333,0,0.66666667,0.166666667,0.8333333333)
+> geneticSimilarityWeight <- 0.4
+> penaltyReplicatedIndividuals <- 1.08
+> inbreedingCoefficientMetric <- TRUE
+> Gmatrix <- matrix(nrow = 4, ncol = 4)
+> Gmatrix[1,] = c(1,0.60,1.40,0.30)
+> Gmatrix[2,] = c(0.60,1,0.50,0.35)
+> Gmatrix[3,] = c(1.40,0.50,1,1.55)
+> Gmatrix[4,] = c(0.30,0.35,1.55,1)
+> inbreedingCoefficientBoundsEstimatorSampleSize <- 300
+> inclusionSet <- c(4)
+> exclusionSet <- c(6)
+> solutionSize <- 2
+> maximumSearchTime <- 500
+> timeWithoutImprovement <- 200
+> maximumNumberMoves <- 400
+> searchMethod <- c("MS")
+> searchParametersMS <- c(5)
+> searchParametersPT <- c(6,0.001,9)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("phenoObsOutput")
+> ### * phenoObsOutput
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: phenoObsOutput
+> ### Title: Output information of pheno OBS.
+> ### Aliases: phenoObsOutput
+> 
+> ### ** Examples
+> 
+> parentsPhenotypeDataFrame <- data.frame(
++ parentNames = c("A","B","C","D"),
++ Yield = c(1200,1300,1250,1150),
++ Lint = c(50,40,45,55),
++ BollType = c(4.5,4,3,4.5))
+> optimalSolutionIdsR <- c(1,4)
+> bestFoundSolutionGeneticDiversity <- 0.80167
+> overallOffspringInformation <- matrix(nrow = 6, ncol = 6)
+> overallOffspringInformation [1,] <- c(1,1,2,1250,45,4.25)
+> overallOffspringInformation [2,] <- c(2,1,3,1225,47.5,3.75)
+> overallOffspringInformation [3,] <- c(3,1,4,1175,52.5,4.5)
+> overallOffspringInformation [3,] <- c(4,2,3,1275,42.5,3.5)
+> overallOffspringInformation [4,] <- c(5,2,4,1225,47.5,4.25)
+> overallOffspringInformation [5,] <- c(6,3,4,1200,50,3.75)
+> solutionSize <- 2
+> parentsGeneticSimilarityMatrix <- matrix(nrow = length(parentsPhenotypeDataFrame$parentNames), ncol = length(parentsPhenotypeDataFrame$parentNames))
+> parentsGeneticSimilarityMatrix[1,] = c(1,0.60,0.40,0.30)
+> parentsGeneticSimilarityMatrix[2,] = c(0.60,1,0.50,0.35)
+> parentsGeneticSimilarityMatrix[3,] = c(0.40,0.50,1,0.55)
+> parentsGeneticSimilarityMatrix[4,] = c(0.30,0.35,0.55,1)
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.14 0.01 0.15 NA NA 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
